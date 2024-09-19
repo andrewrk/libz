@@ -1,6 +1,6 @@
 const std = @import("std");
 
-pub fn build(b: *std.build.Builder) void {
+pub fn build(b: *std.Build) void {
     const lib = b.addStaticLibrary(.{
         .name = "z",
         .target = b.standardTargetOptions(.{}),
@@ -27,7 +27,7 @@ pub fn build(b: *std.build.Builder) void {
         },
         .flags = &.{"-std=c89"},
     });
-    lib.installHeader("zconf.h", "zconf.h");
-    lib.installHeader("zlib.h", "zlib.h");
+    lib.installHeader(b.path("zconf.h"), "zconf.h");
+    lib.installHeader(b.path("zlib.h"), "zlib.h");
     b.installArtifact(lib);
 }
